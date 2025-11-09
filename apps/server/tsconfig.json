@@ -1,0 +1,19 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+
+		"allowSyntheticDefaultImports": true,
+		"incremental": true,
+		"sourceMap": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"],
+			"@marketplace/shared-packages": ["../../shared-packages/dist"]
+		}
+	},
+	"references": [{ "path": "../../shared-packages" }],
+	"include": ["src"]
+}

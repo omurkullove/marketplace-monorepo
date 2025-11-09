@@ -1,0 +1,25 @@
+{
+	"name": "marketplace-monorepo",
+	"private": true,
+	"version": "1.0.0",
+	"devDependencies": {
+		"concurrently": "^9.2.1",
+		"rimraf": "6.1.0",
+		"tsup": "^8.5.0",
+		"tsx": "^4.20.6",
+		"turbo": "^2.6.0",
+		"typescript": "^5.9.3"
+	},
+	"workspaces": ["apps/*", "shared-packages"],
+	"scripts": {
+		"dev": "turbo run dev --parallel",
+		"build": "turbo run build",
+		"clean": "pnpm run clean:turbo && pnpm run clean:ts && pnpm run clean:dist",
+		"clean:turbo": "rimraf  apps/*/.turbo shared-packages/.turbo",
+		"clean:ts": "find . -name \"*.tsbuildinfo\" -delete",
+		"clean:dist": "rimraf apps/*/dist shared-packages/dist",
+		"build:server": "turbo run build --filter=@marketplace/shared-packages --filter=marketplace-server",
+		"start:server": "pnpm --filter marketplace-server start"
+	},
+	"packageManager": "pnpm@10.20.0"
+}
