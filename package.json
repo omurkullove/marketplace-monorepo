@@ -3,14 +3,14 @@
 	"private": true,
 	"version": "1.0.0",
 	"devDependencies": {
-		"concurrently": "^9.2.1",
 		"rimraf": "6.1.0",
-		"tsup": "^8.5.0",
-		"tsx": "^4.20.6",
 		"turbo": "^2.6.0",
 		"typescript": "^5.9.3"
 	},
-	"workspaces": ["apps/*", "shared-packages"],
+	"workspaces": [
+		"apps/*",
+		"shared-packages"
+	],
 	"scripts": {
 		"dev": "turbo run dev --parallel",
 		"build": "turbo run build",

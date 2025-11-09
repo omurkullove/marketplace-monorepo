@@ -8,9 +8,13 @@
 		"incremental": true,
 		"sourceMap": true,
 
+		"resolveJsonModule": true,
+		"module": "commonjs",
+
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
+			"@common": ["src/common"],
 			"@marketplace/shared-packages": ["../../shared-packages/dist"]
 		}
 	},
