@@ -1,18 +1,26 @@
 import type { InterfaceUseCase } from "@/common";
 import type {
 	InterfaceProductRepository,
-	ProductDocument,
+	PaginatedResponse,
+	PaginationRequest,
+	ProductCardDTO,
 } from "@marketplace/shared-packages";
+import { mapProducts } from "../../support/product.helpers";
 
 export class ProductRetrievalAllUseCase
 	implements InterfaceProductRetrievalAllUseCase
 {
 	constructor(private dependencies: Dependencies) {}
-	async execute(): Promise<ResponseModel> {
+	async execute(req: RequestModel): Promise<ResponseModel> {
 		const { productRepository } = this.dependencies;
-		const response = await productRepository.getAll();
+		const response = await productRepository.getPaginated(req);
+		const mappedResponse = mapProducts(response.items);
 
-		return response;
+		return {
+			items: mappedResponse,
+			limit: response.limit,
+			nextCursor: response.nextCursor,
+		};
 	}
 }
 
@@ -20,8 +28,10 @@ type Dependencies = {
 	productRepository: InterfaceProductRepository;
 };
 
-type ResponseModel = Array<ProductDocument>;
+type ResponseModel = PaginatedResponse<ProductCardDTO>;
+
+type RequestModel = PaginationRequest;
 export type InterfaceProductRetrievalAllUseCase = InterfaceUseCase<
-	void,
+	RequestModel,
 	ResponseModel
 >;

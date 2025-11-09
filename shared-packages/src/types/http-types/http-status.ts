@@ -5,4 +5,5 @@ export enum HttpStatus {
 	UNAUTHORIZED = 401,
 	NOT_FOUND = 404,
 	INTERNAL = 500,
+	EXTERNAL = 505,
 }

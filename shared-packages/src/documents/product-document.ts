@@ -4,6 +4,8 @@ export type ProductOffer = {
 	sellerName: string;
 	rating: number;
 	nearest_delivery: Date;
+	currency: string;
+	in_stock: number;
 };
 
 export type ProductDocument = {
@@ -12,4 +14,14 @@ export type ProductDocument = {
 	name: string;
 	attributes: string[];
 	offers: ProductOffer[];
+};
+
+export type ProductCardDTO = {
+	id: string;
+	photoURL: string;
+	name: string;
+	price: number;
+	currency: string;
+	in_stock: number;
+	nearest_delivery: Date;
 };

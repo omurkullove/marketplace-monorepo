@@ -1,4 +1,5 @@
 import type { FirestoreCollections } from "@/common/collection/collection";
+import type { PaginatedResponse } from "@marketplace/shared-packages";
 
 export interface InterfaceDatabaseRepository {
 	create<K extends keyof FirestoreCollections>(
@@ -15,6 +16,12 @@ export interface InterfaceDatabaseRepository {
 		collection: K,
 		id: string,
 	): Promise<FirestoreCollections[K] | null>;
+
+	getPaginated<K extends keyof FirestoreCollections>(
+		collection: K,
+		limit: number,
+		cursor?: string,
+	): Promise<PaginatedResponse<FirestoreCollections[K]>>;
 
 	update<K extends keyof FirestoreCollections>(
 		collection: K,
