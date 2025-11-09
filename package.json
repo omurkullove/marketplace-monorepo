@@ -7,10 +7,7 @@
 		"turbo": "^2.6.0",
 		"typescript": "^5.9.3"
 	},
-	"workspaces": [
-		"apps/*",
-		"shared-packages"
-	],
+	"workspaces": ["apps/*", "shared-packages"],
 	"scripts": {
 		"dev": "turbo run dev --parallel",
 		"build": "turbo run build",
@@ -19,7 +16,8 @@
 		"clean:ts": "find . -name \"*.tsbuildinfo\" -delete",
 		"clean:dist": "rimraf apps/*/dist shared-packages/dist",
 		"build:server": "turbo run build --filter=@marketplace/shared-packages --filter=marketplace-server",
-		"start:server": "pnpm --filter marketplace-server start"
+		"start:server": "pnpm --filter marketplace-server start",
+		"start:all": "pnpm --filter marketplace-server start & pnpm --filter marketplace-client preview"
 	},
 	"packageManager": "pnpm@10.20.0"
 }
