@@ -19,8 +19,8 @@ export interface InterfaceDatabaseRepository {
 
 	getPaginated<K extends keyof FirestoreCollections>(
 		collection: K,
-		limit: number,
-		cursor?: string,
+		size: number,
+		page?: number,
 	): Promise<PaginatedResponse<FirestoreCollections[K]>>;
 
 	update<K extends keyof FirestoreCollections>(

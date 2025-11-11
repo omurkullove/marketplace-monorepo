@@ -18,19 +18,22 @@ export class ProductRepository
 		const { db } = this.dependencies;
 		const snapshot = await db.getPaginated(
 			COLLECTION.PRODUCTS,
-			req.limit,
-			req?.cursor,
+			req.size,
+			req?.page,
 		);
 
 		return {
 			items: snapshot.items,
-			nextCursor: snapshot.nextCursor,
-			limit: snapshot.limit,
+			nextPage: snapshot.nextPage,
+			size: snapshot.size,
+			total: snapshot.total,
 		};
 	}
 
-	getById(id: string): Promise<ProductDocument | null> {
-		throw new Error("Method not implemented.");
+	async getById(id: string): Promise<ProductDocument | null> {
+		const { db } = this.dependencies;
+		const data = await db.getById(COLLECTION.PRODUCTS, id);
+		return data;
 	}
 
 	async getAll(): Promise<ProductDocument[]> {

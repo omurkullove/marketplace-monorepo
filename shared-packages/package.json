@@ -6,8 +6,5 @@
 	"scripts": {
 		"build": "tsc -b",
 		"dev": "tsc -b tsconfig.json --watch"
-	},
-	"devDependencies": {
-		"typescript": "^5.9.3"
 	}
 }

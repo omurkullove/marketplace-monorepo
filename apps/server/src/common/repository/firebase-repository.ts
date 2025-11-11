@@ -3,43 +3,48 @@ import type { FirestoreCollections } from "../collection/collection";
 import { db } from "../firebase/config";
 import type { InterfaceDatabaseRepository } from "../interface/layers/repository-interface";
 import { convertProductTimestamps } from "../tools/convert-product-timestamp";
+import * as admin from "firebase-admin";
 
 export class FirebaseDatabaseRepository implements InterfaceDatabaseRepository {
 	async getPaginated<K extends keyof FirestoreCollections>(
 		collection: K,
-		limit: number,
-		cursor?: string,
+		size: number,
+		page = 1,
 	): Promise<PaginatedResponse<FirestoreCollections[K]>> {
-		let query = db
-			.collection(collection)
+		const collectionRef = db.collection(collection as string);
+
+		const offset = (page - 1) * size;
+
+		const snapshot = await collectionRef
 			.orderBy("id")
-			.limit(limit + 1);
+			.orderBy(admin.firestore.FieldPath.documentId())
+			.limit(offset + size)
+			.get();
 
-		if (cursor) {
-			const lastDocSnapshot = await db.collection(collection).doc(cursor).get();
-			if (lastDocSnapshot.exists) {
-				query = query.startAfter(lastDocSnapshot);
-			}
-		}
-
-		const snapshot = await query.get();
-		const items = snapshot.docs.map((doc) => ({
+		const allItems = snapshot.docs.map((doc) => ({
 			...convertProductTimestamps(doc.data() as FirestoreCollections[K]),
 			id: doc.id,
 		}));
 
-		let nextCursor: string | null = null;
-		if (items.length > limit) {
-			const nextItem = items.pop();
-			if (nextItem) nextCursor = nextItem.id;
-		}
+		const items = allItems.slice(offset, offset + size);
 
-		return { items, limit, nextCursor };
+		const totalSnapshot = await collectionRef.count().get();
+		const total = totalSnapshot.data().count ?? 0;
+
+		const totalPages = Math.ceil(total / size);
+
+		return {
+			items,
+			size,
+			nextPage: page < totalPages ? page + 1 : null,
+			total,
+		};
 	}
+
 	async getAll<K extends keyof FirestoreCollections>(
 		collection: K,
 	): Promise<Array<FirestoreCollections[K]>> {
-		const snapshot = await db.collection("products").get();
+		const snapshot = await db.collection(collection).get();
 		return snapshot.docs.map((doc) => {
 			const data = doc.data() as FirestoreCollections[K];
 			return {

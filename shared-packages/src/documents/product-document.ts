@@ -1,10 +1,12 @@
+import type { Currency } from "../types/common-types/currency-dto";
+
 export type ProductOffer = {
 	id: string;
 	price: number;
 	sellerName: string;
 	rating: number;
 	nearest_delivery: Date;
-	currency: string;
+	currency: Currency;
 	in_stock: number;
 };
 
@@ -21,7 +23,8 @@ export type ProductCardDTO = {
 	photoURL: string;
 	name: string;
 	price: number;
-	currency: string;
+	currency: Currency;
 	in_stock: number;
 	nearest_delivery: Date;
+	rating: number;
 };

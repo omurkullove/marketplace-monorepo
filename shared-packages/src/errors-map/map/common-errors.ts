@@ -18,4 +18,22 @@ export const CommonErrorMap: Record<CommonErrorCode, AppErrorJSON> = {
 		message: "Internal server error",
 		code: CommonErrorCode.INTERNAL_ERROR,
 	},
+
+	[CommonErrorCode.INVALID_QUERY_OBJECT]: {
+		status: HttpStatus.BAD_REQUEST,
+		message: "Invalid query object",
+		code: CommonErrorCode.INVALID_QUERY_OBJECT,
+	},
+
+	[CommonErrorCode.MISSING_FIELD]: {
+		status: HttpStatus.BAD_REQUEST,
+		message: "Missing required fields",
+		code: CommonErrorCode.MISSING_FIELD,
+	},
+
+	[CommonErrorCode.INVALID_VALUE]: {
+		status: HttpStatus.BAD_REQUEST,
+		message: "Invalid request value",
+		code: CommonErrorCode.INVALID_VALUE,
+	},
 };
