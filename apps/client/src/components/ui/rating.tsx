@@ -14,8 +14,7 @@ const Rating = ({
 	color = "var(--color-rating-base)",
 }: RatingProps) => {
 	const stars = [];
-	const uniqueId = useId(); // ✅ уникальный id для компонента
-
+	const uniqueId = useId();
 	for (let i = 1; i <= max; i++) {
 		if (value >= i) {
 			stars.push(
@@ -33,7 +32,7 @@ const Rating = ({
 			);
 		} else if (value > i - 1 && value < i) {
 			const fillPercentage = (value - (i - 1)) * 100;
-			const gradId = `grad-${uniqueId}-${i}`; // ✅ уникальный id
+			const gradId = `grad-${uniqueId}-${i}`;
 			stars.push(
 				<svg
 					key={i}
