@@ -5,7 +5,7 @@ import type {
 	ROUTE,
 } from "@marketplace/shared-packages";
 import { buildQuery } from "../helpers/route-helpers";
-import { SERVER_API_ENDPOINT } from "../env/env";
+import { SERVER_API_ENDPOINT, SERVER_API_URL } from "../env/env";
 
 export function useInfinityFetch<T>(
 	path: ROUTE,
@@ -28,7 +28,7 @@ export function useInfinityFetch<T>(
 
 			try {
 				const currentPage = isFirstPage ? 1 : page;
-				const url = `${SERVER_API_ENDPOINT}${path}`;
+				const url = `${SERVER_API_URL}${SERVER_API_ENDPOINT}${path}`;
 				const fullUrl = buildQuery(url, { ...options, page: currentPage });
 				const res = await fetch(fullUrl);
 				const data = (await res.json()) as PaginatedResponse<T>;

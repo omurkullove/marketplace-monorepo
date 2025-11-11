@@ -17,17 +17,6 @@ export default defineConfig(({ mode }) => {
 				"@": path.resolve(__dirname, "./src"),
 			},
 		},
-		server: {
-			port: 5173,
-			host: "localhost",
-			proxy: {
-				"/api": {
-					target: env.VITE_SERVER_API_URL,
-					changeOrigin: true,
-					secure: false,
-				},
-			},
-		},
 
 		esbuild: {
 			drop: mode === "production" ? ["console", "debugger"] : [],

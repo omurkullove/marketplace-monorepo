@@ -7,7 +7,7 @@ import {
 	type ROUTE,
 } from "@marketplace/shared-packages";
 import { buildPath, buildQuery } from "../helpers/route-helpers";
-import { SERVER_API_ENDPOINT } from "../env/env";
+import { SERVER_API_ENDPOINT, SERVER_API_URL } from "../env/env";
 
 type UseFetchOptions = Omit<RequestInit, "body"> & {
 	pathParams?: CommonRequestOptions;
@@ -48,7 +48,7 @@ export function useFetch<T = unknown>({
 				optionsRef.current?.queryParams,
 			) as ROUTE;
 
-			const finalUrl = `${SERVER_API_ENDPOINT}${finalPath}`;
+			const finalUrl = `${SERVER_API_URL}${SERVER_API_ENDPOINT}${finalPath}`;
 
 			const response = await fetch(finalUrl, {
 				...optionsRef.current,
