@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles/global.css";
 import { RouterManager } from "./core/router/config/route-manager";
 import { MiddlewareCollector } from "./core/router/middlewares/middleware-collector.ts";
+import "./styles/global.css";
 
 const middlewareCollector = new MiddlewareCollector();
 
