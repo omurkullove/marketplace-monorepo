@@ -52,19 +52,6 @@
 
 ---
 
-## 🗂️ Структура проекта
-/
-├─ apps/
-│ ├─ client/ # фронтенд (Vite + React)
-│ └─ server/ # сервер (Express + TypeScript)
-├─ shared-packages/ # shared-packages (типы, утилиты)
-├─ turbo.json
-├─ package.json # root-скрипты (turborepo)
-└─ README.md
-
-
----
-
 ## ⚙️ Быстрый старт (локально)
 
 ### Требования
@@ -96,24 +83,24 @@ pnpm build
 pnpm start:all
 ```
 
+---
+
 
 ## Переменные окружения — примеры
 
-### Сервер — .server.env
-
-# Firebase Admin SDK
+# Сервер — .server.env
+```bash
 FIREBASE_PROJECT_ID=markeplace-monorepo
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@markeplace-monorepo.iam.gserviceaccount.com
-
-# FIREBASE_PRIVATE_KEY: обязательно экранировать переносы строк!
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...escaped key...\n-----END PRIVATE KEY-----\n"
-
-# PORT
 PORT=4000
+```
 
 
-## Клиент — .env.development / .env.production
+# Клиент — .env.development / .env.production
 
+
+```bash
 # .env.development
 VITE_SERVER_API_URL=http://localhost:4000
 VITE_SERVER_API_ENDPOINT=/api
@@ -121,7 +108,9 @@ VITE_SERVER_API_ENDPOINT=/api
 # .env.production
 VITE_SERVER_API_URL=https://marketplace-monorepo.onrender.com
 VITE_SERVER_API_ENDPOINT=/api
+```
 
+---
 
 
 ## Скрипты
@@ -141,6 +130,8 @@ VITE_SERVER_API_ENDPOINT=/api
 }
 ```
 
+---
+
 ## 🧭 API — основные endpoint’ы
 
 ### Базовый URL (production):
@@ -152,20 +143,22 @@ http://localhost:4000/api
 
 
 # GET /api/products
-## Описание: получить список продуктов.
+### Описание: получить список продуктов.
 
-## Обязательные query-параметры:
+### Обязательные query-параметры:
 
+```bash
 - page — номер страницы (например: 1)
 - size — размер страницы (0–100)
 - currency — желаемая валюта (например: USD)
+```
 
-## Пример запроса:
+### Пример запроса:
 ```bash
 curl "http://localhost:4000/api/products?page=1&size=20&currency=USD"
 ```
 
-## Пример ответа:
+### Пример ответа:
 
 ```json
 {
@@ -198,16 +191,20 @@ curl "http://localhost:4000/api/products?page=1&size=20&currency=USD"
 }
 ```
 
+---
+
 
 # GET /api/products/:id
 
-## Описание: получить подробную информацию о товаре по id.
+### Описание: получить подробную информацию о товаре по id.
 
-## Пример запроса:
+### Пример запроса:
 
 
-## Обязательные query-параметры:
+### Обязательные query-параметры:
+```bash
 - currency — желаемая валюта (например: USD)
+```
 
 
 
@@ -215,7 +212,7 @@ curl "http://localhost:4000/api/products?page=1&size=20&currency=USD"
 curl "http://localhost:4000/api/products/eL1oanduEZLbEMIMpK6z?currency=USD"
 ```
 
-## Пример ответа:
+### Пример ответа:
 
 ```json
 {
