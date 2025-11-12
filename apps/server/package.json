@@ -5,8 +5,7 @@
 	"scripts": {
 		"dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/index.ts",
 		"build": "tsc -b && tsc-alias",
-		"start": "node dist/index.js",
-		"seed": "ts-node-dev -r tsconfig-paths/register src/common/scripts/test.ts"
+		"start": "node dist/index.js"
 	},
 	"dependencies": {
 		"@marketplace/shared-packages": "workspace:*",

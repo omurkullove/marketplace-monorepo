@@ -8,6 +8,7 @@ type ExtractParams<Path extends string> =
 export const PAGE = {
 	HOME: "/",
 	PRODUCT_DETAILS: "/products/:id",
+	NOT_FOUND: "*",
 } as const;
 
 export type PageKey = keyof typeof PAGE;
